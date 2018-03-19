@@ -25,6 +25,7 @@ import com.google.gson.Gson
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
 import com.roostermornings.android.activity.MyAlarmsFragmentActivity
+import com.roostermornings.android.keys.Flag
 import com.roostermornings.android.keys.NotificationChannelID
 import com.roostermornings.android.keys.NotificationID
 import com.roostermornings.android.sync.DownloadSyncAdapter
@@ -109,6 +110,7 @@ class RoosterFirebaseMessagingService : FirebaseMessagingService() {
         @TargetApi(26)
         if(RoosterUtils.hasO()) {
             val channelA = notificationManager.getNotificationChannel(NotificationChannelID.FIREBASE_MESSAGING.name)
+            channelA.setShowBadge(true)
 
             if(channelA == null) {
 
@@ -122,6 +124,7 @@ class RoosterFirebaseMessagingService : FirebaseMessagingService() {
                         "FirebaseMessagingService",
                         NotificationManager.IMPORTANCE_HIGH)
                 channelB.setSound(defaultSoundUri, audioAttributes)
+                channelB.setShowBadge(true)
 
                 notificationManager.createNotificationChannel(channelB)
             }
@@ -129,6 +132,7 @@ class RoosterFirebaseMessagingService : FirebaseMessagingService() {
 
         val notification = if(RoosterUtils.hasO()) {
             NotificationCompat.Builder(this, NotificationChannelID.FIREBASE_MESSAGING.name)
+                    .setNumber(BaseApplication.getNotificationFlag(Flag.ROOSTER_COUNT.name))
                     .setCategory(Notification.CATEGORY_ALARM)
                     .setContentTitle("Rooster")
                     .setSmallIcon(R.drawable.logo)
@@ -138,6 +142,7 @@ class RoosterFirebaseMessagingService : FirebaseMessagingService() {
                     .build()
         } else {
             NotificationCompat.Builder(this)
+                    .setNumber(BaseApplication.getNotificationFlag(Flag.ROOSTER_COUNT.name))
                     .setContentTitle("Rooster")
                     .setSmallIcon(R.drawable.logo)
                     .setContentText(messageBody)
