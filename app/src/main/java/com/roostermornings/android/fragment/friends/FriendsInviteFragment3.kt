@@ -75,8 +75,8 @@ class FriendsInviteFragment3 : BaseFragment() {
 
     private var mAddContactsAdapter: RecyclerView.Adapter<*>? = null
 
-    private val addableHeader by lazy { resources.getString(R.string.add_contacts) }
-    private val invitableHeader by lazy { resources.getString(R.string.invite_contacts) }
+    private var addableHeader = ""
+    private var invitableHeader = ""
 
     private var mListener: OnFragmentInteractionListener? = null
 
@@ -93,6 +93,9 @@ class FriendsInviteFragment3 : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject(BaseApplication.roosterApplicationComponent)
+
+        addableHeader = resources.getString(R.string.add_contacts)
+        invitableHeader = resources.getString(R.string.invite_contacts)
 
         myContactsController = MyContactsController(AppContext)
     }
