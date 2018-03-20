@@ -22,29 +22,23 @@ package com.roostermornings.android.media
  */
 
 import android.annotation.TargetApi
-import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
-import android.support.v4.media.MediaDescriptionCompat
+import android.support.v4.app.NotificationCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaButtonReceiver
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationManagerCompat
 import com.roostermornings.android.BaseApplication
-
 import com.roostermornings.android.R
-import com.roostermornings.android.util.RoosterUtils
-
-import com.squareup.picasso.Picasso
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.graphics.Color
 import com.roostermornings.android.keys.NotificationChannelID
+import com.roostermornings.android.service.MediaService
+import com.roostermornings.android.util.RoosterUtils
+import com.squareup.picasso.Picasso
 
 
 /**
@@ -130,7 +124,7 @@ object MediaNotificationHelper {
             if(channelA == null) {
                 val channelB = NotificationChannel(NotificationChannelID.MEDIA_SERVICE.name,
                         "MediaService",
-                        NotificationManager.IMPORTANCE_HIGH)
+                        NotificationManager.IMPORTANCE_DEFAULT)
                 channelB.setSound(null, null)
 
                 mNotificationManager?.createNotificationChannel(channelB)
@@ -147,22 +141,30 @@ object MediaNotificationHelper {
                 .setStyle(android.support.v4.media.app.NotificationCompat.MediaStyle()
                         // Show actions 0,2,4 in compact view
                         .setShowActionsInCompactView(0,2,4)
-                        .setMediaSession(mediaSession.sessionToken)
-                        .setShowCancelButton(true)
-                        .setCancelButtonIntent(MediaButtonReceiver.buildMediaButtonPendingIntent(context,
-                                PlaybackStateCompat.ACTION_STOP)))
+                        .setMediaSession(mediaSession.sessionToken))
                 .setSmallIcon(R.drawable.logo_icon)
                 .setShowWhen(false)
                 .setContentIntent(controller.sessionActivity)
-                // Stop the service when the notification is swiped away
-                .setDeleteIntent(MediaButtonReceiver.buildMediaButtonPendingIntent(context,
-                        PlaybackStateCompat.ACTION_STOP))
                 .setContentTitle(description.title)
                 .setContentText(description.description)
                 .setLargeIcon(art)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setOngoing(mPlaybackState.state == PlaybackStateCompat.STATE_PLAYING)
                 .setOnlyAlertOnce(true)
+
+                if(!RoosterUtils.hasLollipop()) {
+                    notificationBuilder
+                            .setStyle(android.support.v4.media.app.NotificationCompat.MediaStyle()
+                                    // Show actions 0,2,4 in compact view
+                                    .setShowActionsInCompactView(0,2,4)
+                                    .setMediaSession(mediaSession.sessionToken)
+                                    .setShowCancelButton(true)
+                                    .setCancelButtonIntent(MediaButtonReceiver.buildMediaButtonPendingIntent(context,
+                                            PlaybackStateCompat.ACTION_STOP)))
+                            // Stop the service when the notification is swiped away
+                            .setDeleteIntent(MediaButtonReceiver.buildMediaButtonPendingIntent(context,
+                                    PlaybackStateCompat.ACTION_STOP))
+                }
 
         notificationBuilder.addAction(NotificationCompat.Action(
                 R.drawable.exo_controls_previous,
@@ -188,6 +190,7 @@ object MediaNotificationHelper {
                 MediaButtonReceiver.buildMediaButtonPendingIntent(context,
                         PlaybackStateCompat.ACTION_SKIP_TO_NEXT)))
 
-        mNotificationManager?.notify(NOTIFICATION_ID, notificationBuilder.build())
+        (context as MediaService).startForeground(NOTIFICATION_ID, notificationBuilder.build())
+        //mNotificationManager?.notify(NOTIFICATION_ID, notificationBuilder.build())
     }
 }

@@ -6,22 +6,27 @@
 package com.roostermornings.android.service
 
 import android.annotation.SuppressLint
-import android.support.v4.media.MediaBrowserCompat
-import android.support.v4.media.MediaBrowserServiceCompat
-import android.support.v4.media.session.MediaSessionCompat
 import android.app.PendingIntent
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.net.Uri
 import android.net.wifi.WifiManager
-import android.os.*
+import android.os.Bundle
+import android.os.Handler
+import android.os.ResultReceiver
 import android.support.v4.app.NotificationManagerCompat
+import android.support.v4.media.MediaBrowserCompat
+import android.support.v4.media.MediaBrowserServiceCompat
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaButtonReceiver
 import android.support.v4.media.session.MediaControllerCompat
+import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.support.v4.media.session.PlaybackStateCompat.*
 import android.util.Pair
@@ -142,6 +147,8 @@ class MediaService : MediaBrowserServiceCompat(),
         NotificationManagerCompat.from(this).cancelAll()
 
         if(mWiFiLock?.isHeld == true) mWiFiLock?.release()
+
+        stopForeground(true)
     }
 
     private fun setAttachedActivity() {
@@ -368,6 +375,7 @@ class MediaService : MediaBrowserServiceCompat(),
                 }
                 PlaybackStateCompat.STATE_PAUSED -> {
                     if(mHasPlayed) MediaNotificationHelper.createNotification(mThis, mSession)
+                    stopForeground(false)
                 }
             }
         }
