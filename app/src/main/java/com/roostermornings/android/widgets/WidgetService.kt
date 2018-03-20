@@ -6,8 +6,10 @@
 package com.roostermornings.android.widgets
 
 import android.app.Service
-import android.appwidget.AppWidgetManager
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.IBinder
 import com.roostermornings.android.util.KotlinUtils
 

@@ -6,13 +6,10 @@
 package com.roostermornings.android.geolocation
 
 import android.content.Context
+import android.net.wifi.WifiManager
 import com.google.firebase.database.IgnoreExtraProperties
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import android.net.wifi.WifiInfo
-import android.content.Context.WIFI_SERVICE
-import android.net.wifi.WifiManager
-
 
 
 /**

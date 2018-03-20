@@ -13,16 +13,14 @@ import android.support.v7.widget.SwitchCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.AnimationUtils
-import android.view.animation.ScaleAnimation
+import android.view.animation.*
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-
+import butterknife.BindView
+import butterknife.OnCheckedChanged
+import butterknife.OnClick
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.BuildConfig
 import com.roostermornings.android.R
@@ -37,15 +35,9 @@ import com.roostermornings.android.sqlutil.DeviceAlarmTableManager
 import com.roostermornings.android.util.Constants
 import com.roostermornings.android.util.RoosterUtils
 import com.roostermornings.android.util.Toaster
-
-import java.util.Calendar
-
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
-
-import butterknife.BindView
-import butterknife.OnCheckedChanged
-import butterknife.OnClick
 
 class NewAlarmFragment1 : BaseFragment() {
 
@@ -87,9 +79,6 @@ class NewAlarmFragment1 : BaseFragment() {
 
     @BindView(R.id.new_alarm_fragment1_switch_recurring)
     lateinit var switchRecurring: SwitchCompat
-
-    @BindView(R.id.new_alarm_fragment1_delete_alarm)
-    lateinit var deleteAlarm: Button
 
     @BindView(R.id.new_alarm_fragment1_save_alarm)
     lateinit var saveAlarm: Button

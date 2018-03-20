@@ -12,7 +12,6 @@ import android.widget.RelativeLayout
 import com.github.amlcurran.showcaseview.MaterialShowcaseDrawer
 import com.github.amlcurran.showcaseview.ShowcaseView
 import com.github.amlcurran.showcaseview.targets.Target
-import com.github.amlcurran.showcaseview.targets.ViewTarget
 import com.roostermornings.android.R
 
 /**

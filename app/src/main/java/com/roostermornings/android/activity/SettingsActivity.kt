@@ -7,15 +7,12 @@ package com.roostermornings.android.activity
 
 import android.os.Bundle
 import android.widget.TextView
-
-import com.mobsandgeeks.saripaar.ValidationError
+import butterknife.BindView
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
 import com.roostermornings.android.activity.base.BaseActivity
 import com.roostermornings.android.dagger.RoosterApplicationComponent
 import com.roostermornings.android.fragment.SettingsFragment
-
-import butterknife.BindView
 
 class SettingsActivity : BaseActivity() {
 

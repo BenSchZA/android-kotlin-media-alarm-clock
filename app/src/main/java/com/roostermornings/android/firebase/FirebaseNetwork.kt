@@ -7,9 +7,7 @@ package com.roostermornings.android.firebase
 
 import android.content.Context
 import android.net.Uri
-
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -23,10 +21,7 @@ import com.roostermornings.android.keys.PrefsKey
 import com.roostermornings.android.util.MyContactsController
 import com.roostermornings.android.util.StrUtils
 import java.sql.Timestamp
-
-import java.util.Calendar
-import java.util.HashMap
-import java.util.TimeZone
+import java.util.*
 
 object FirebaseNetwork {
 
@@ -79,20 +74,6 @@ object FirebaseNetwork {
                     else -> FA.SetUserProp(FA.UserProp.sign_in_method::class.java, FA.UserProp.sign_in_method.Unknown)
                 }
             }
-        }
-    }
-
-    fun updateLastSeen() {
-        val fDB = FirebaseDatabase.getInstance().reference
-        val fUser = FirebaseAuth.getInstance().currentUser
-        val calendar = Calendar.getInstance()
-
-        val childUpdates = HashMap<String, Any>()
-        calendar.timeZone = TimeZone.getTimeZone("UTC")
-
-        if (fUser?.uid?.isNotBlank() == true) {
-            childUpdates.put("users/${fUser.uid}/last_seen", calendar.timeInMillis)
-            fDB.updateChildren(childUpdates)
         }
     }
 

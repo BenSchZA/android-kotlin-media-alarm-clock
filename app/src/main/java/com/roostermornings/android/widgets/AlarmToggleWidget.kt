@@ -5,15 +5,18 @@
 
 package com.roostermornings.android.widgets
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.widget.RemoteViews
-import com.roostermornings.android.R
-import android.app.PendingIntent
-import android.content.*
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.view.View
+import android.widget.RemoteViews
 import android.widget.Toast
 import com.roostermornings.android.BaseApplication
+import com.roostermornings.android.R
 import com.roostermornings.android.activity.MyAlarmsFragmentActivity
 import com.roostermornings.android.activity.NewAlarmFragmentActivity
 import com.roostermornings.android.domain.database.Alarm
@@ -31,8 +34,6 @@ import javax.inject.Named
  * App Widget Configuration implemented in [AlarmToggleWidgetConfigureActivity]
  */
 class AlarmToggleWidget : AppWidgetProvider() {
-
-    val ctx: Context? = null
 
     @Inject
     @field:Named("default") lateinit var defaultSharedPreferences: SharedPreferences

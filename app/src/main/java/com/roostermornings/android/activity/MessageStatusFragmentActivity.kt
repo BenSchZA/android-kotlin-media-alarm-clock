@@ -19,16 +19,13 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.SearchView
-import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
-
-import com.google.firebase.auth.FirebaseUser
+import butterknife.BindView
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
 import com.roostermornings.android.activity.base.BaseActivity
@@ -36,16 +33,11 @@ import com.roostermornings.android.dagger.RoosterApplicationComponent
 import com.roostermornings.android.firebase.FA
 import com.roostermornings.android.fragment.message_status.MessageStatusReceivedFragment1
 import com.roostermornings.android.fragment.message_status.MessageStatusSentFragment2
-import com.roostermornings.android.sqlutil.AudioTableManager
-import com.roostermornings.android.sqlutil.DeviceAudioQueueItem
-import com.roostermornings.android.util.Constants
-import com.roostermornings.android.util.FontsOverride
-
-import javax.inject.Inject
-
-import butterknife.BindView
 import com.roostermornings.android.keys.Action
 import com.roostermornings.android.keys.ViewType
+import com.roostermornings.android.sqlutil.DeviceAudioQueueItem
+import com.roostermornings.android.util.Constants
+import javax.inject.Inject
 
 class MessageStatusFragmentActivity : BaseActivity(), MessageStatusReceivedFragment1.OnFragmentInteractionListener, MessageStatusSentFragment2.OnFragmentInteractionListener {
 

@@ -19,8 +19,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
-import com.google.firebase.auth.FirebaseUser
+import butterknife.BindView
+import com.facebook.FacebookSdk.getApplicationContext
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -35,18 +35,11 @@ import com.roostermornings.android.fragment.base.BaseFragment
 import com.roostermornings.android.util.JSONPersistence
 import com.roostermornings.android.util.MyContactsController
 import com.roostermornings.android.util.Toaster
-
-import java.util.ArrayList
-import java.util.HashMap
-
-import javax.inject.Inject
-
-import butterknife.BindView
 import retrofit.Callback
 import retrofit.Response
 import retrofit.Retrofit
-
-import com.facebook.FacebookSdk.getApplicationContext
+import java.util.*
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
@@ -302,7 +295,7 @@ class FriendsMyFragment1 : BaseFragment() {
 
     companion object {
 
-        protected val TAG: String = FriendsFragmentActivity::class.java.simpleName
+        private val TAG: String = FriendsFragmentActivity::class.java.simpleName
 
         private var statusCode = -1
 

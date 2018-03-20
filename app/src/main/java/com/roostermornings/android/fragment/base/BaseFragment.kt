@@ -12,38 +12,31 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import butterknife.ButterKnife
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.mobsandgeeks.saripaar.ValidationError
 import com.mobsandgeeks.saripaar.Validator
-
-import java.util.ArrayList
-import java.util.Collections
-import java.util.Comparator
-
-import javax.inject.Inject
-
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.activity.MyAlarmsFragmentActivity
 import com.roostermornings.android.apis.GoogleIHTTPClient
+import com.roostermornings.android.apis.NodeIHTTPClient
 import com.roostermornings.android.dagger.RoosterApplicationComponent
-import com.roostermornings.android.domain.local.Contact
-import com.roostermornings.android.domain.local.Friend
 import com.roostermornings.android.domain.database.SocialRooster
 import com.roostermornings.android.domain.database.User
-import com.roostermornings.android.apis.NodeIHTTPClient
+import com.roostermornings.android.domain.local.Contact
+import com.roostermornings.android.domain.local.Friend
 import com.roostermornings.android.sqlutil.DeviceAudioQueueItem
-
-import butterknife.ButterKnife
-import com.google.firebase.auth.FirebaseUser
+import java.util.*
+import javax.inject.Inject
 
 abstract class BaseFragment : Fragment(), Validator.ValidationListener {
 
     @Inject lateinit var AppContext: Context
     @Inject lateinit var baseApplication: BaseApplication
 
-    val baseActivityListener: BaseActivityListener by lazy { activity as BaseActivityListener }
+    private val baseActivityListener: BaseActivityListener by lazy { activity as BaseActivityListener }
 
     var firebaseUser: FirebaseUser? = null
     @Inject

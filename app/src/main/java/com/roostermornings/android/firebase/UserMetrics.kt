@@ -17,7 +17,6 @@ import java.util.*
 object UserMetrics {
 
     private val USER_METRICS = "user_metrics"
-    private val ACTIVE_DAYS = "active_days"
 
     private fun isUserSignedIn(): Boolean {
         return FirebaseAuth.getInstance().currentUser != null

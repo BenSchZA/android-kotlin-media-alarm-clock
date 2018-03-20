@@ -8,21 +8,18 @@ package com.roostermornings.android.service
 import android.accounts.Account
 import android.annotation.TargetApi
 import android.app.*
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.SharedPreferences
+import android.content.*
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.media.*
+import android.media.AudioAttributes.USAGE_ALARM
 import android.net.Uri
-import android.os.Binder
-import android.os.Bundle
-import android.os.Handler
-import android.os.IBinder
-import android.os.Vibrator
+import android.os.*
 import android.support.v4.app.NotificationCompat
-
+import android.support.v4.content.WakefulBroadcastReceiver
+import android.support.v4.media.AudioAttributesCompat
 import com.crashlytics.android.Crashlytics
 import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.crash.FirebaseCrash
 import com.google.firebase.storage.FirebaseStorage
 import com.roostermornings.android.BaseApplication
@@ -31,42 +28,26 @@ import com.roostermornings.android.activity.DeviceAlarmFullScreenActivity
 import com.roostermornings.android.activity.MessageStatusFragmentActivity
 import com.roostermornings.android.activity.MyAlarmsFragmentActivity
 import com.roostermornings.android.adapter_data.ChannelManager
-import com.roostermornings.android.firebase.FA
 import com.roostermornings.android.domain.database.ChannelRooster
-import com.roostermornings.android.sqlutil.DeviceAlarm
-import com.roostermornings.android.sqlutil.DeviceAlarmController
-import com.roostermornings.android.sqlutil.DeviceAlarmTableManager
-import com.roostermornings.android.sqlutil.DeviceAudioQueueItem
-import com.roostermornings.android.sqlutil.AudioTableManager
-
-import java.io.File
-import java.io.IOException
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
-
-import javax.inject.Inject
-import javax.inject.Named
-
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import android.graphics.Color
-import android.media.*
-import android.media.AudioAttributes.USAGE_ALARM
-import android.support.v4.content.WakefulBroadcastReceiver
-import android.support.v4.media.AudioAttributesCompat
-import com.google.firebase.auth.FirebaseUser
 import com.roostermornings.android.domain.local.MetricsSyncEvent
+import com.roostermornings.android.firebase.FA
 import com.roostermornings.android.firebase.UserMetrics
 import com.roostermornings.android.keys.Action
 import com.roostermornings.android.keys.Extra
 import com.roostermornings.android.keys.NotificationChannelID
 import com.roostermornings.android.keys.NotificationID
-import com.roostermornings.android.media.MediaNotificationHelper
 import com.roostermornings.android.realm.RealmAlarmFailureLog
-import com.roostermornings.android.util.JSONPersistence
+import com.roostermornings.android.sqlutil.*
 import com.roostermornings.android.util.*
 import com.roostermornings.android.util.Constants.AUDIO_TYPE_CHANNEL
 import com.roostermornings.android.util.Constants.AUDIO_TYPE_SOCIAL
+import java.io.File
+import java.io.IOException
 import java.util.*
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
+import javax.inject.Named
 
 // Service to manage playing and pausing audio during Rooster alarm
 class AudioService : Service() {
@@ -1223,20 +1204,14 @@ class AudioService : Service() {
 
             var alarmMinimumVolume = 0.4f
 
-            if (alarmVolumeArrayEntries[0] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "")) {
-                alarmMinimumVolume = 0.0f
-            } else if (alarmVolumeArrayEntries[1] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "")) {
-                alarmMinimumVolume = 0.2f
-            } else if (alarmVolumeArrayEntries[2] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "")) {
-                alarmMinimumVolume = 0.4f
-            } else if (alarmVolumeArrayEntries[3] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "")) {
-                alarmMinimumVolume = 0.6f
-            } else if (alarmVolumeArrayEntries[4] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "")) {
-                alarmMinimumVolume = 0.8f
-            } else if (alarmVolumeArrayEntries[5] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "")) {
-                alarmMinimumVolume = 1.0f
-            } else {
-                alarmMinimumVolume = 0.4f
+            alarmMinimumVolume = when {
+                alarmVolumeArrayEntries[0] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "") -> 0.0f
+                alarmVolumeArrayEntries[1] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "") -> 0.2f
+                alarmVolumeArrayEntries[2] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "") -> 0.4f
+                alarmVolumeArrayEntries[3] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "") -> 0.6f
+                alarmVolumeArrayEntries[4] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "") -> 0.8f
+                alarmVolumeArrayEntries[5] == defaultSharedPreferences.getString(Constants.USER_SETTINGS_ALARM_VOLUME, "") -> 1.0f
+                else -> 0.4f
             }
 
             return alarmMinimumVolume

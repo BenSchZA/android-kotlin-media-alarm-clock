@@ -11,13 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-
+import android.widget.*
 import com.roostermornings.android.R
 import com.roostermornings.android.activity.FriendsFragmentActivity
 import com.roostermornings.android.domain.local.Contact
@@ -26,8 +20,7 @@ import com.roostermornings.android.firebase.FirebaseNetwork
 import com.roostermornings.android.keys.ViewType
 import com.roostermornings.android.util.RoosterUtils
 import com.roostermornings.android.util.Toaster
-
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by bscholtz on 06/03/17.
@@ -42,7 +35,6 @@ class FriendsInviteListAdapter// Provide a suitable constructor (depends on the 
     // you provide access to all the views for a data item in a activityContentView holder
     inner class AddViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         // each data item is just a string in this case
-        var imgProfilePic: ImageView = itemView.findViewById(R.id.my_friends_profile_pic)
         var txtName: TextView = itemView.findViewById(R.id.my_friends_profile_name)
         var txtInitials: TextView = itemView.findViewById(R.id.txtInitials)
         var btnAdd: Button = itemView.findViewById(R.id.friends_add_button)
@@ -50,7 +42,6 @@ class FriendsInviteListAdapter// Provide a suitable constructor (depends on the 
 
     inner class InviteViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         // each data item is just a string in this case
-        var imgProfilePic: ImageView = itemView.findViewById(R.id.my_friends_profile_pic)
         var txtName: TextView = itemView.findViewById(R.id.my_friends_profile_name)
         var txtInitials: TextView = itemView.findViewById(R.id.txtInitials)
         var btnAdd: Button = itemView.findViewById(R.id.friends_add_button)

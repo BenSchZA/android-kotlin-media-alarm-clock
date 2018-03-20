@@ -13,11 +13,9 @@ import android.app.PendingIntent
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
-
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.activity.DeviceAlarmFullScreenActivity
 import com.roostermornings.android.activity.MyAlarmsFragmentActivity
@@ -31,18 +29,14 @@ import com.roostermornings.android.realm.RealmAlarmFailureLog
 import com.roostermornings.android.realm.RealmScheduledSnackbar
 import com.roostermornings.android.receiver.DeviceAlarmReceiver
 import com.roostermornings.android.service.AudioService
+import com.roostermornings.android.snackbar.SnackbarManager
 import com.roostermornings.android.sync.DownloadSyncAdapter
 import com.roostermornings.android.util.Constants
-import com.roostermornings.android.snackbar.SnackbarManager
-
-import java.util.ArrayList
-import java.util.Calendar
-
-import javax.inject.Inject
-
 import com.roostermornings.android.util.Constants.AUTHORITY
 import com.roostermornings.android.util.RoosterUtils.hasKitKat
 import com.roostermornings.android.util.RoosterUtils.hasLollipop
+import java.util.*
+import javax.inject.Inject
 
 /**
  * Created by bscholtz on 2/16/17.

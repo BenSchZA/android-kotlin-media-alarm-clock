@@ -79,8 +79,8 @@ public class Authenticator extends AbstractAccountAuthenticator {
     @Override
     public Bundle getAccountRemovalAllowed(AccountAuthenticatorResponse response, Account account) {
         Bundle result = new Bundle();
-        boolean allowed = false;
-        result.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, allowed);
+        // Set key to false to disallow account removal
+        result.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, false);
         return result;
     }
 }

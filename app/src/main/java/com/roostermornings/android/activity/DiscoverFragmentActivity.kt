@@ -10,7 +10,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.media.AudioManager
-import android.media.session.PlaybackState
 import android.os.Bundle
 import android.os.RemoteException
 import android.support.v4.media.MediaBrowserCompat
@@ -26,7 +25,6 @@ import android.view.KeyEvent
 import android.view.Menu
 import android.view.MotionEvent
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.MediaController
 import android.widget.TextView
 import android.widget.Toast
@@ -44,7 +42,6 @@ import com.roostermornings.android.util.RoosterUtils
 import com.roostermornings.android.util.Toaster
 import io.realm.Realm
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class DiscoverFragmentActivity : BaseActivity(), DiscoverListAdapter.DiscoverAudioSampleInterface, MediaController.MediaPlayerControl {
 
@@ -54,8 +51,6 @@ class DiscoverFragmentActivity : BaseActivity(), DiscoverListAdapter.DiscoverAud
     lateinit var mRecyclerView: RecyclerView
     @BindView(R.id.toolbar_title)
     lateinit var toolbarTitle: TextView
-    @BindView(R.id.button_bar)
-    lateinit var buttonBarLayout: LinearLayout
     @BindView(R.id.swiperefresh)
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
 

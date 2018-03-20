@@ -32,8 +32,8 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-
+import butterknife.BindView
+import butterknife.OnClick
 import com.afollestad.materialdialogs.MaterialDialog
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
@@ -43,32 +43,26 @@ import com.roostermornings.android.adapter_data.RoosterAlarmManager
 import com.roostermornings.android.custom_ui.SquareFrameLayout
 import com.roostermornings.android.dagger.RoosterApplicationComponent
 import com.roostermornings.android.domain.database.Alarm
-import com.roostermornings.android.snackbar.SnackbarManager
-import com.roostermornings.android.sync.DownloadSyncAdapter
-import com.roostermornings.android.widgets.AlarmToggleWidget
-
-import java.util.ArrayList
-import java.util.Collections
-
-import javax.inject.Inject
-
-import butterknife.BindView
-import butterknife.OnClick
 import com.roostermornings.android.keys.Action
 import com.roostermornings.android.keys.Extra
 import com.roostermornings.android.onboarding.CustomCommandInterface
 import com.roostermornings.android.onboarding.InterfaceCommands
 import com.roostermornings.android.onboarding.ProfileCreationFragment
-import com.roostermornings.android.util.JSONPersistence
-import com.roostermornings.android.util.*
-import me.grantland.widget.AutofitTextView
-
+import com.roostermornings.android.snackbar.SnackbarManager
+import com.roostermornings.android.sync.DownloadSyncAdapter
+import com.roostermornings.android.util.ConnectivityUtils
 import com.roostermornings.android.util.Constants.AUTHORITY
+import com.roostermornings.android.util.DetailsUtils
+import com.roostermornings.android.util.JSONPersistence
+import com.roostermornings.android.widgets.AlarmToggleWidget
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.activity_navigation_drawer.*
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import kotlinx.android.synthetic.main.nav_header_navigation_drawer.view.*
+import me.grantland.widget.AutofitTextView
+import java.util.*
+import javax.inject.Inject
 
 class MyAlarmsFragmentActivity : BaseActivity(), CustomCommandInterface, NavigationView.OnNavigationItemSelectedListener {
 
@@ -78,8 +72,6 @@ class MyAlarmsFragmentActivity : BaseActivity(), CustomCommandInterface, Navigat
     lateinit var mRecyclerView: RecyclerView
     @BindView(R.id.toolbar_title)
     lateinit var toolbarTitle: TextView
-    @BindView(R.id.button_bar)
-    lateinit var buttonBarLayout: LinearLayout
     @BindView(R.id.add_alarm)
     lateinit var buttonAddAlarm: FloatingActionButton
 
@@ -108,10 +100,6 @@ class MyAlarmsFragmentActivity : BaseActivity(), CustomCommandInterface, Navigat
     lateinit var jsonPersistence: JSONPersistence
     @Inject
     lateinit var connectivityUtils: ConnectivityUtils
-
-    companion object {
-        private val TAG = MyAlarmsFragmentActivity::class.java.simpleName
-    }
 
     override fun inject(component: RoosterApplicationComponent) {
         component.inject(this)

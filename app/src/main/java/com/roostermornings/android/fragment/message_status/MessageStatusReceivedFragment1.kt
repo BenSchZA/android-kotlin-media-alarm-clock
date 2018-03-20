@@ -9,15 +9,11 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.content.res.ResourcesCompat
-import android.support.v4.graphics.drawable.DrawableCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.google.firebase.auth.FirebaseUser
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
 import com.roostermornings.android.adapter.MessageStatusReceivedListAdapter
@@ -29,13 +25,9 @@ import com.roostermornings.android.sqlutil.AudioTableManager
 import com.roostermornings.android.sqlutil.DeviceAudioQueueItem
 import com.roostermornings.android.util.JSONPersistence
 import com.roostermornings.android.util.MyContactsController
-
-import java.util.ArrayList
-
-import javax.inject.Inject
-
-import butterknife.BindView
 import kotlinx.android.synthetic.main.fragment_message_status.*
+import java.util.*
+import javax.inject.Inject
 
 class MessageStatusReceivedFragment1 : BaseFragment() {
 
@@ -128,9 +120,7 @@ class MessageStatusReceivedFragment1 : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = initiate(inflater, R.layout.fragment_message_status, container, false)
-
-        return view
+        return initiate(inflater, R.layout.fragment_message_status, container, false)
     }
 
     private fun retrieveSocialAudioItems() {

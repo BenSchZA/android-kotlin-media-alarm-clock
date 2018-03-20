@@ -8,16 +8,13 @@ package com.roostermornings.android.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
-
+import butterknife.BindView
+import butterknife.OnClick
 import com.roostermornings.android.R
 import com.roostermornings.android.activity.base.BaseActivity
 import com.roostermornings.android.dagger.RoosterApplicationComponent
 import com.roostermornings.android.util.Constants
-
-import butterknife.BindView
-import butterknife.OnClick
 
 class InvalidateVersion : BaseActivity() {
 
@@ -25,8 +22,6 @@ class InvalidateVersion : BaseActivity() {
     lateinit var updateTitle: TextView
     @BindView(R.id.update_description)
     lateinit var updateDescription: TextView
-    @BindView(R.id.update_button)
-    lateinit var updateButton: Button
 
     override fun inject(component: RoosterApplicationComponent) {
         component.inject(this)

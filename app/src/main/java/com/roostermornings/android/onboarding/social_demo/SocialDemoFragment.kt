@@ -63,11 +63,7 @@ class SocialDemoFragment: BaseFragment() {
          */
 
         fun newInstance(): SocialDemoFragment {
-            val fragment = SocialDemoFragment()
-//            val args = Bundle()
-//            args.putParcelable(ARG_WINDOW_SIZE, windowSize)
-//            fragment.arguments = args
-            return fragment
+            return SocialDemoFragment()
         }
     }
 

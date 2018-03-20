@@ -7,11 +7,8 @@ package com.roostermornings.android.domain.database
 
 import com.google.firebase.database.Exclude
 import com.google.firebase.database.IgnoreExtraProperties
-
 import java.io.Serializable
-import java.util.HashMap
-
-import com.roostermornings.android.util.RoosterUtils.notNull
+import java.util.*
 
 @IgnoreExtraProperties
 class User : Serializable {

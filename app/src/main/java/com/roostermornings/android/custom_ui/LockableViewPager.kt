@@ -15,12 +15,12 @@ class LockableViewPager : ViewPager {
     var isRightScrollEnabled = true
     var isLeftScrollEnabled = true
 
-    var lastDirection = Direction.NONE
+    private var lastDirection = Direction.NONE
     enum class Direction {
         NONE, RIGHT, LEFT
     }
 
-    var mStartDragX: Float = 0f
+    private var mStartDragX: Float = 0f
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

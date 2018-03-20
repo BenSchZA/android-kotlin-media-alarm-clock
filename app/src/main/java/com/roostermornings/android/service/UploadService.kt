@@ -12,26 +12,19 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.net.Uri
-import android.os.Binder
-import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
-import android.os.IBinder
-import android.os.Message
+import android.os.*
 import android.support.v4.app.NotificationCompat
 import android.util.Log
 import android.widget.Toast
-
 import com.google.firebase.storage.FirebaseStorage
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
-import com.roostermornings.android.firebase.FA
+import com.roostermornings.android.apis.NodeIHTTPClient
+import com.roostermornings.android.domain.database.User
 import com.roostermornings.android.domain.local.FCMPayloadSocialRooster
 import com.roostermornings.android.domain.node.NodeAPIResult
-import com.roostermornings.android.domain.database.User
-import com.roostermornings.android.apis.NodeIHTTPClient
+import com.roostermornings.android.firebase.FA
 import com.roostermornings.android.firebase.FirebaseNetwork
 import com.roostermornings.android.keys.Extra
 import com.roostermornings.android.keys.NotificationChannelID
@@ -39,15 +32,12 @@ import com.roostermornings.android.keys.NotificationID
 import com.roostermornings.android.util.Constants
 import com.roostermornings.android.util.RoosterUtils
 import com.roostermornings.android.util.Toaster
-
-import java.io.File
-import java.util.ArrayList
-
-import javax.inject.Inject
-
 import retrofit.Callback
 import retrofit.Response
 import retrofit.Retrofit
+import java.io.File
+import java.util.*
+import javax.inject.Inject
 
 //Service to offload the task of uploading a new Social Rooster to Firebase cloud storage, receive a link -> Firebase entries & Node post
 class UploadService : Service() {
@@ -270,6 +260,6 @@ class UploadService : Service() {
     }
 
     companion object {
-        protected val TAG = UploadService::class.java.simpleName
+        private val TAG = UploadService::class.java.simpleName
     }
 }

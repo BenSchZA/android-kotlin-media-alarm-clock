@@ -9,7 +9,6 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.content.res.ResourcesCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -17,13 +16,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.BuildConfig
 import com.roostermornings.android.R
@@ -35,14 +28,9 @@ import com.roostermornings.android.util.Constants
 import com.roostermornings.android.util.JSONPersistence
 import com.roostermornings.android.util.MyContactsController
 import com.roostermornings.android.util.Toaster
-
-import java.util.ArrayList
-import java.util.Calendar
-
-import javax.inject.Inject
-
-import butterknife.BindView
 import kotlinx.android.synthetic.main.fragment_message_status.*
+import java.util.*
+import javax.inject.Inject
 
 class MessageStatusSentFragment2 : BaseFragment() {
 
@@ -124,9 +112,7 @@ class MessageStatusSentFragment2 : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = initiate(inflater, R.layout.fragment_message_status, container, false)
-
-        return view
+        return initiate(inflater, R.layout.fragment_message_status, container, false)
     }
 
     private fun updateMessageStatus() {
@@ -237,11 +223,6 @@ class MessageStatusSentFragment2 : BaseFragment() {
                 mSocialRoosterQueueReference?.addValueEventListener(socialRoosterQueueListener)
             }
         }
-    }
-
-    fun manualSwipeRefresh() {
-        if (!swiperefresh.isRefreshing) swiperefresh.isRefreshing = true
-        updateMessageStatus()
     }
 
     fun searchRecyclerViewAdapter(query: String) {

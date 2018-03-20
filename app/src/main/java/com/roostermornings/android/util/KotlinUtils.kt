@@ -6,8 +6,6 @@
 package com.roostermornings.android.util
 
 import com.crashlytics.android.Crashlytics
-import com.google.firebase.crash.FirebaseCrash
-import java.util.logging.Logger
 
 /**
  * com.roostermornings.android.util

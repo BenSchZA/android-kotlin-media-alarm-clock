@@ -27,7 +27,7 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-
+import butterknife.BindView
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -35,30 +35,28 @@ import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
 import com.roostermornings.android.activity.base.BaseActivity
 import com.roostermornings.android.dagger.RoosterApplicationComponent
+import com.roostermornings.android.domain.database.User
 import com.roostermornings.android.domain.local.Contact
 import com.roostermornings.android.domain.local.Friend
-import com.roostermornings.android.domain.database.User
+import com.roostermornings.android.firebase.FA
 import com.roostermornings.android.firebase.FirebaseNetwork
-import com.roostermornings.android.onboarding.number_entry.NumberEntryDialogFragment
 import com.roostermornings.android.fragment.friends.FriendsInviteFragment3
 import com.roostermornings.android.fragment.friends.FriendsMyFragment1
 import com.roostermornings.android.fragment.friends.FriendsRequestFragment2
-import com.roostermornings.android.util.Constants
-
-import javax.inject.Inject
-
-import butterknife.BindView
-import com.roostermornings.android.firebase.FA
 import com.roostermornings.android.keys.Action
 import com.roostermornings.android.keys.Flag
-import com.roostermornings.android.onboarding.*
-import com.roostermornings.android.onboarding.number_entry.NumberEntryFragment
-import com.roostermornings.android.onboarding.number_entry.NumberEntryListener
 import com.roostermornings.android.keys.PrefsKey
 import com.roostermornings.android.keys.RequestCode
+import com.roostermornings.android.onboarding.CustomCommandInterface
+import com.roostermornings.android.onboarding.InterfaceCommands
+import com.roostermornings.android.onboarding.ProfileCreationFragment
+import com.roostermornings.android.onboarding.number_entry.NumberEntryDialogFragment
+import com.roostermornings.android.onboarding.number_entry.NumberEntryFragment
+import com.roostermornings.android.onboarding.number_entry.NumberEntryListener
 import com.roostermornings.android.snackbar.SnackbarManager
 import com.roostermornings.android.util.Toaster
 import kotlinx.android.synthetic.main.activity_friends.*
+import javax.inject.Inject
 
 //Responsible for managing friends: 1) my friends, 2) addable friends, 3) friend invites
 class FriendsFragmentActivity : BaseActivity(), FriendsMyFragment1.OnFragmentInteractionListener, FriendsRequestFragment2.OnFragmentInteractionListener, NumberEntryListener, CustomCommandInterface {
@@ -68,8 +66,6 @@ class FriendsFragmentActivity : BaseActivity(), FriendsMyFragment1.OnFragmentInt
     lateinit var toolbarTitle: TextView
     @BindView(R.id.tabs)
     lateinit var tabLayout: TabLayout
-    @BindView(R.id.home_friends)
-    lateinit var buttonMyFriends: ImageButton
     @BindView(R.id.button_bar)
     lateinit var buttonBarLayout: LinearLayout
 
@@ -475,12 +471,6 @@ class FriendsFragmentActivity : BaseActivity(), FriendsMyFragment1.OnFragmentInt
             receiver = null
         }
         super.onDestroy()
-    }
-
-    fun getTabNotification(position: Int): Int {
-        val tab = tabLayout.getTabAt(position)
-        val imageNotification = tab?.customView?.findViewById<ImageView>(R.id.notification_friends)
-        return imageNotification?.visibility?:-1
     }
 
     override fun onFragmentInteraction(uri: Uri) {

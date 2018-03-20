@@ -9,6 +9,7 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.domain.database.Alarm
 import com.roostermornings.android.firebase.FirebaseNetwork
@@ -16,10 +17,8 @@ import com.roostermornings.android.sqlutil.DeviceAlarmController
 import com.roostermornings.android.sqlutil.DeviceAlarmTableManager
 import com.roostermornings.android.util.StrUtils
 import com.roostermornings.android.util.Toaster
-import javax.inject.Inject
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
 import java.util.*
+import javax.inject.Inject
 
 /**
  * com.roostermornings.android.`adapter-data`

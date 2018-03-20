@@ -3,7 +3,7 @@
   ~ Rooster Mornings Android.
   ~ Copyright (c)  2017 Roosta Media. All rights reserved.
   -->
-<paths xmlns:android="http://schemas.android.com/apk/res/android">
+<paths>
     <external-path name="rooster_pictures" path="Android/data/com.roostermornings.android/files/Pictures" />
     <files-path name="rooster_media" path="Media/" />
     <cache-path name="rooster_cache" path="Cache/" />

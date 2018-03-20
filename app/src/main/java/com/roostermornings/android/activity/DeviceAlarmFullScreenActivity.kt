@@ -5,12 +5,7 @@
 
 package com.roostermornings.android.activity
 
-import android.content.BroadcastReceiver
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.ServiceConnection
+import android.content.*
 import android.graphics.drawable.BitmapDrawable
 import android.media.AudioManager
 import android.net.Uri
@@ -23,22 +18,20 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-
+import butterknife.BindView
+import butterknife.OnClick
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
 import com.roostermornings.android.activity.base.BaseActivity
 import com.roostermornings.android.dagger.RoosterApplicationComponent
 import com.roostermornings.android.firebase.FA
+import com.roostermornings.android.keys.Action
+import com.roostermornings.android.keys.Extra
 import com.roostermornings.android.service.AudioService
 import com.roostermornings.android.sqlutil.DeviceAudioQueueItem
 import com.roostermornings.android.util.StrUtils
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-
-import butterknife.BindView
-import butterknife.OnClick
-import com.roostermornings.android.keys.Action
-import com.roostermornings.android.keys.Extra
 import kotlinx.android.synthetic.main.activity_device_alarm_full_screen.*
 
 class DeviceAlarmFullScreenActivity : BaseActivity() {
@@ -61,18 +54,6 @@ class DeviceAlarmFullScreenActivity : BaseActivity() {
 
     @BindView(R.id.alarm_count)
     lateinit var txtAlarmCount: TextView
-
-    @BindView(R.id.alarm_snooze_button)
-    lateinit var mButtonAlarmSnooze: Button
-
-    @BindView(R.id.alarm_dismiss)
-    lateinit var mButtonAlarmDismiss: TextView
-
-    @BindView(R.id.skip_next)
-    lateinit var skipNext: Button
-
-    @BindView(R.id.skip_previous)
-    lateinit var skipPrevious: Button
 
     @BindView(R.id.alarm_action_button)
     lateinit var alarmActionButton: Button

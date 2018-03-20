@@ -11,14 +11,11 @@ import android.net.NetworkInfo
 import android.os.AsyncTask
 import android.telephony.TelephonyManager
 import android.widget.Toast
-import java.net.InetAddress
-import java.net.URL
-import java.net.UnknownHostException
 
 class ConnectivityUtils(val context: Context) {
 
     // Get the network info
-    fun getNetworkInfo(): NetworkInfo? {
+    private fun getNetworkInfo(): NetworkInfo? {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return cm.activeNetworkInfo
     }

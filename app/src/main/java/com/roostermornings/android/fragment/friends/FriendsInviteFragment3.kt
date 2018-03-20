@@ -5,7 +5,6 @@
 
 package com.roostermornings.android.fragment.friends
 
-import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.AsyncTask
@@ -13,51 +12,38 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
-
+import butterknife.OnClick
+import com.facebook.FacebookSdk.getApplicationContext
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
 import com.roostermornings.android.activity.FriendsFragmentActivity
 import com.roostermornings.android.adapter.FriendsInviteListAdapter
-import com.roostermornings.android.firebase.FA
 import com.roostermornings.android.dagger.RoosterApplicationComponent
+import com.roostermornings.android.domain.database.User
 import com.roostermornings.android.domain.local.Contact
 import com.roostermornings.android.domain.local.Friend
 import com.roostermornings.android.domain.local.LocalContacts
 import com.roostermornings.android.domain.node.NodeUsers
-import com.roostermornings.android.domain.database.User
 import com.roostermornings.android.firebase.UserMetrics
 import com.roostermornings.android.fragment.base.BaseFragment
 import com.roostermornings.android.keys.RequestCode
-import com.roostermornings.android.util.Constants
 import com.roostermornings.android.util.JSONPersistence
 import com.roostermornings.android.util.LifeCycle
 import com.roostermornings.android.util.MyContactsController
 import com.roostermornings.android.util.Toaster
-
-import java.util.ArrayList
-import java.util.HashMap
-
-import javax.inject.Inject
-
-import butterknife.BindView
-import butterknife.OnClick
-import retrofit.Call
+import kotlinx.android.synthetic.main.fragment_friends_3.*
 import retrofit.Callback
 import retrofit.Response
 import retrofit.Retrofit
-
-import com.facebook.FacebookSdk.getApplicationContext
-import kotlinx.android.synthetic.main.fragment_friends_3.*
+import java.util.*
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
@@ -417,7 +403,7 @@ class FriendsInviteFragment3 : BaseFragment() {
 
     companion object {
 
-        protected val TAG = FriendsFragmentActivity::class.java.simpleName
+        private val TAG = FriendsFragmentActivity::class.java.simpleName
 
         /**
          * Use this factory method to create a new instance of

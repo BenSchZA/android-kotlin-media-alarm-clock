@@ -12,7 +12,6 @@ import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import butterknife.BindView
 import butterknife.OnClick
@@ -26,21 +25,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.*
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import com.mobsandgeeks.saripaar.Validator
 import com.mobsandgeeks.saripaar.annotation.Email
 import com.mobsandgeeks.saripaar.annotation.NotEmpty
 import com.mobsandgeeks.saripaar.annotation.Password
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
-import com.roostermornings.android.firebase.AuthManager
 import com.roostermornings.android.dagger.RoosterApplicationComponent
 import com.roostermornings.android.domain.local.OnboardingJourneyEvent
+import com.roostermornings.android.firebase.AuthManager
 import com.roostermornings.android.firebase.UserMetrics
 import com.roostermornings.android.fragment.base.BaseFragment
 import com.roostermornings.android.util.Toaster
 import kotlinx.android.synthetic.main.fragment_onboarding_profile_creation.*
-import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 import javax.inject.Inject
@@ -59,12 +58,6 @@ class ProfileCreationFragment : BaseFragment(), FragmentInterface, Validator.Val
 
     private var facebookCallbackManager: CallbackManager? = null
     private var mGoogleApiClient: GoogleApiClient? = null
-
-    @BindView(R.id.already_user_textview)
-    lateinit var mTextViewAlreadyUser: TextView
-
-    @BindView(R.id.sign_up_email_textview)
-    lateinit var mTextViewSignUpEmail: TextView
 
     @BindView(R.id.login_button)
     lateinit var facebookLoginButton: LoginButton

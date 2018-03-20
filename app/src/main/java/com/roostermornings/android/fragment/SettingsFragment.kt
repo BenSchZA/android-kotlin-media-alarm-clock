@@ -7,10 +7,8 @@ package com.roostermornings.android.fragment
 
 import android.os.Bundle
 import android.preference.PreferenceFragment
-
 import com.roostermornings.android.R
 import com.roostermornings.android.keys.About
-import com.roostermornings.android.util.Constants
 import com.roostermornings.android.util.DetailsUtils
 
 class SettingsFragment : PreferenceFragment() {

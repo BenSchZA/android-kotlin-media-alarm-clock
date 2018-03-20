@@ -21,7 +21,6 @@ import com.roostermornings.android.domain.database.Channel
 import com.roostermornings.android.domain.local.GeoHashChannel
 import com.roostermornings.android.firebase.FirebaseNetwork
 import com.roostermornings.android.firebase.UserMetrics
-import com.roostermornings.android.util.JSONPersistence
 import com.roostermornings.android.keys.PrefsKey
 import com.roostermornings.android.util.*
 import retrofit.Callback
@@ -103,7 +102,7 @@ class GeoHashUtils(val context: Context) {
         //Get user location
         val geolocationRequest = GeolocationRequest(context, false)
         val baseApplication = context.applicationContext as BaseApplication
-        val call =  baseApplication.mGoogleAPIService.getGeolocation(context.getResources().getString(R.string.google_geolocation_api_key), geolocationRequest)
+        val call =  baseApplication.mGoogleAPIService.getGeolocation(context.resources.getString(R.string.google_geolocation_api_key), geolocationRequest)
 
         call.enqueue(object : Callback<GeolocationAPIResult> {
             override fun onResponse(response: Response<GeolocationAPIResult>,
@@ -171,7 +170,7 @@ class GeoHashUtils(val context: Context) {
     }
 
     fun getAreaFromCoordinates(location: GeolocationAPIResult.Location): String {
-        try
+        return try
         {
             Geocoder(context, Locale.getDefault())
                     .getFromLocation(location.lat!!.toDouble(), location.lng!!.toDouble(), 1)[0]
@@ -181,10 +180,10 @@ class GeoHashUtils(val context: Context) {
                         val countryName: String = address.countryName
                         return "$locality, $adminArea, $countryName"
                     }
-            return ""
+            ""
         } catch (e: IOException) {
             e.printStackTrace()
-            return ""
+            ""
         }
     }
 
@@ -224,9 +223,9 @@ class GeoHashUtils(val context: Context) {
     companion object {
 
         // The equatorial radius of the earth in meters
-        val EARTH_EQ_RADIUS = 6378137.0
+        private val EARTH_EQ_RADIUS = 6378137.0
         // The meridional radius of the earth in meters
-        val EARTH_POLAR_RADIUS = 6357852.3
+        private val EARTH_POLAR_RADIUS = 6357852.3
 
         //Listener for geohash node fetch
         var onFlagGeoHashChannelsDataListener: OnFlagGeoHashChannelsDataListener? = null
@@ -273,7 +272,7 @@ class GeoHashUtils(val context: Context) {
             return distance(geoHash1.point.latitude, geoHash1.point.longitude, geoHash2.point.latitude, geoHash2.point.longitude)
         }
 
-        fun distance(lat1: Double, long1: Double, lat2: Double, long2: Double): Double {
+        private fun distance(lat1: Double, long1: Double, lat2: Double, long2: Double): Double {
             // Earth's mean radius in meters
             val radius = (EARTH_EQ_RADIUS + EARTH_POLAR_RADIUS) / 2
             val latDelta = Math.toRadians(lat1 - lat2)

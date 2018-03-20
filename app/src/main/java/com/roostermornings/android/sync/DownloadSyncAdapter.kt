@@ -7,19 +7,15 @@ package com.roostermornings.android.sync
 
 import android.accounts.Account
 import android.accounts.AccountManager
-import android.content.AbstractThreadedSyncAdapter
-import android.content.ContentProviderClient
-import android.content.ContentResolver
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.content.SyncResult
+import android.content.*
+import android.content.ContentValues.TAG
+import android.content.Context.ACCOUNT_SERVICE
 import android.net.TrafficStats
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-
 import com.crashlytics.android.Crashlytics
+import com.facebook.FacebookSdk.getApplicationContext
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -33,39 +29,30 @@ import com.roostermornings.android.adapter_data.ChannelManager
 import com.roostermornings.android.domain.database.Channel
 import com.roostermornings.android.domain.database.ChannelRooster
 import com.roostermornings.android.domain.database.SocialRooster
+import com.roostermornings.android.domain.local.MetricsSyncEvent
+import com.roostermornings.android.firebase.UserMetrics
+import com.roostermornings.android.geolocation.GeoHashUtils
 import com.roostermornings.android.keys.Action
 import com.roostermornings.android.keys.Flag
 import com.roostermornings.android.sqlutil.AudioTableManager
 import com.roostermornings.android.sqlutil.DeviceAlarmTableManager
 import com.roostermornings.android.sqlutil.DeviceAudioQueueItem
 import com.roostermornings.android.util.Constants
-import com.roostermornings.android.geolocation.GeoHashUtils
+import com.roostermornings.android.util.Constants.ACCOUNT
+import com.roostermornings.android.util.Constants.ACCOUNT_TYPE
 import com.roostermornings.android.util.JSONPersistence
 import com.roostermornings.android.util.RoosterUtils
-import com.roostermornings.android.util.StrUtils
 import com.roostermornings.android.util.Toaster
 import com.squareup.picasso.Picasso
-
 import java.io.File
-import java.io.FileOutputStream
 import java.net.MalformedURLException
 import java.net.URL
 import java.net.URLConnection
-import java.util.Calendar
-import java.util.TreeMap
+import java.util.*
 import java.util.concurrent.SynchronousQueue
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
-
 import javax.inject.Inject
-
-import android.content.ContentValues.TAG
-import android.content.Context.ACCOUNT_SERVICE
-import com.facebook.FacebookSdk.getApplicationContext
-import com.roostermornings.android.domain.local.MetricsSyncEvent
-import com.roostermornings.android.firebase.UserMetrics
-import com.roostermornings.android.util.Constants.ACCOUNT
-import com.roostermornings.android.util.Constants.ACCOUNT_TYPE
 
 /**
  * Handle the transfer of data between a server and an

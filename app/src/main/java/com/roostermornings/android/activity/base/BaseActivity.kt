@@ -7,13 +7,7 @@ package com.roostermornings.android.activity.base
 
 import android.accounts.Account
 import android.app.ActivityManager
-import android.content.BroadcastReceiver
-import android.content.ComponentName
-import android.content.ContentResolver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.SharedPreferences
+import android.content.*
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -28,55 +22,49 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-
+import butterknife.ButterKnife
+import butterknife.OnClick
+import butterknife.Optional
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.Theme
+import com.crashlytics.android.Crashlytics
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 import com.mobsandgeeks.saripaar.ValidationError
 import com.mobsandgeeks.saripaar.Validator
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
+import com.roostermornings.android.activity.*
 import com.roostermornings.android.apis.GoogleIHTTPClient
+import com.roostermornings.android.apis.NodeIHTTPClient
 import com.roostermornings.android.dagger.RoosterApplicationComponent
 import com.roostermornings.android.domain.database.Alarm
 import com.roostermornings.android.domain.database.User
 import com.roostermornings.android.firebase.AuthManager
+import com.roostermornings.android.firebase.FirebaseNetwork
 import com.roostermornings.android.firebase.UserMetrics
 import com.roostermornings.android.fragment.base.BaseFragment
-import com.roostermornings.android.apis.NodeIHTTPClient
-import com.roostermornings.android.receiver.BackgroundTaskReceiver
-import com.roostermornings.android.service.FirebaseListenerService
-import com.roostermornings.android.sqlutil.AudioTableManager
-import com.roostermornings.android.sqlutil.DeviceAlarmController
-import com.roostermornings.android.sqlutil.DeviceAlarmTableManager
-
-import javax.inject.Inject
-import javax.inject.Named
-
-import butterknife.ButterKnife
-import butterknife.OnClick
-import butterknife.Optional
-import com.crashlytics.android.Crashlytics
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
-import com.roostermornings.android.activity.*
-import com.roostermornings.android.firebase.FA
-import com.roostermornings.android.firebase.FirebaseNetwork
 import com.roostermornings.android.geolocation.GeoHashUtils
 import com.roostermornings.android.keys.Action
 import com.roostermornings.android.keys.Flag
-import com.roostermornings.android.realm.RealmAlarmFailureLog
-import com.roostermornings.android.service.ForegroundService
-import com.roostermornings.android.util.JSONPersistence
 import com.roostermornings.android.keys.PrefsKey
+import com.roostermornings.android.realm.RealmAlarmFailureLog
+import com.roostermornings.android.receiver.BackgroundTaskReceiver
+import com.roostermornings.android.service.FirebaseListenerService
+import com.roostermornings.android.service.ForegroundService
+import com.roostermornings.android.sqlutil.AudioTableManager
+import com.roostermornings.android.sqlutil.DeviceAlarmController
+import com.roostermornings.android.sqlutil.DeviceAlarmTableManager
 import com.roostermornings.android.util.*
-
 import com.roostermornings.android.util.Constants.AUTHORITY
+import javax.inject.Inject
+import javax.inject.Named
 
 abstract class BaseActivity : AppCompatActivity(), Validator.ValidationListener, BaseFragment.BaseActivityListener {
 
-    var mAuth: FirebaseAuth? = null
+    private var mAuth: FirebaseAuth? = null
     private var mAuthListener: FirebaseAuth.AuthStateListener? = null
 
     private var roosterNotificationReceiver: BroadcastReceiver? = null
@@ -687,8 +675,6 @@ abstract class BaseActivity : AppCompatActivity(), Validator.ValidationListener,
     }
 
     companion object {
-        private val TAG = BaseActivity::class.java.simpleName
-
         var mCurrentUser: User? = null
 
         fun setBadge(context: Context, count: Int) {

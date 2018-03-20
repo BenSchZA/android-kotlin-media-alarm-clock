@@ -11,7 +11,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -19,8 +18,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -35,14 +32,9 @@ import com.roostermornings.android.fragment.base.BaseFragment
 import com.roostermornings.android.util.JSONPersistence
 import com.roostermornings.android.util.MyContactsController
 import com.roostermornings.android.util.Toaster
-
-import java.util.ArrayList
-import java.util.HashMap
-
-import javax.inject.Inject
-
-import butterknife.BindView
 import kotlinx.android.synthetic.main.fragment_friends_2.*
+import java.util.*
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
@@ -71,9 +63,7 @@ class FriendsRequestFragment2 : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = initiate(inflater, R.layout.fragment_friends_2, container, false)
-
-        return view
+        return initiate(inflater, R.layout.fragment_friends_2, container, false)
     }
 
     //NB: bind ButterKnife to activityContentView and then initialise UI elements
@@ -146,11 +136,6 @@ class FriendsRequestFragment2 : BaseFragment() {
         mRequestsReference?.addListenerForSingleValueEvent(friendsListener)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        mListener?.onFragmentInteraction(uri)
-    }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
@@ -202,7 +187,7 @@ class FriendsRequestFragment2 : BaseFragment() {
 
     companion object {
 
-        protected val TAG = FriendsFragmentActivity::class.java.simpleName
+        private val TAG = FriendsFragmentActivity::class.java.simpleName
 
         /**
          * Use this factory method to create a new instance of

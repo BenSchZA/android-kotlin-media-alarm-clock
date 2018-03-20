@@ -153,12 +153,12 @@ public class RoosterUtils {
             return "Weekdays";
         else if (days.size() == 2 && days.indexOf("Sat") != -1 && days.indexOf("Sun") != -1)
             return "Weekend";
-        String returnString = "";
+        StringBuilder returnString = new StringBuilder();
 
         for (String day : days) {
-            returnString += day + " ";
+            returnString.append(day).append(" ");
         }
 
-        return returnString;
+        return returnString.toString();
     }
 }

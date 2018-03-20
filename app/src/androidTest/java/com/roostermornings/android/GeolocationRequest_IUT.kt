@@ -6,19 +6,10 @@
 package com.roostermornings.android
 
 import android.content.Context
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
-import org.junit.Assert.*
-import org.hamcrest.Matchers.*
 import android.telephony.TelephonyManager
 import com.roostermornings.android.geolocation.GeolocationRequest
-
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import org.junit.Before
 
 @RunWith(AndroidJUnit4::class)
 class GeolocationRequest_IUT {

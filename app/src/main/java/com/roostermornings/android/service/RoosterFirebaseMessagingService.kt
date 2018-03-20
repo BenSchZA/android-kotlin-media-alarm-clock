@@ -9,16 +9,13 @@ import android.accounts.Account
 import android.annotation.TargetApi
 import android.app.*
 import android.content.ContentResolver
-import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
-import android.media.AudioAttributes.*
+import android.media.AudioAttributes.USAGE_NOTIFICATION
 import android.media.AudioManager
 import android.media.RingtoneManager
-import android.net.Uri
 import android.support.v4.app.NotificationCompat
 import android.util.Log
-
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
@@ -29,13 +26,10 @@ import com.roostermornings.android.keys.Flag
 import com.roostermornings.android.keys.NotificationChannelID
 import com.roostermornings.android.keys.NotificationID
 import com.roostermornings.android.sync.DownloadSyncAdapter
-
-import org.json.JSONObject
-
-import javax.inject.Inject
-
 import com.roostermornings.android.util.Constants.AUTHORITY
 import com.roostermornings.android.util.RoosterUtils
+import org.json.JSONObject
+import javax.inject.Inject
 
 class RoosterFirebaseMessagingService : FirebaseMessagingService() {
 

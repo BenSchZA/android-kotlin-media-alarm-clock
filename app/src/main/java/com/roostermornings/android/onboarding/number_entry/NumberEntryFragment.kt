@@ -33,7 +33,7 @@ class NumberEntryFragment: BaseFragment(), Validator.ValidationListener {
     @NotEmpty
     lateinit var mobileNumber: EditText
 
-    var validator = Validator(this)
+    private var validator = Validator(this)
     private var mListener: NumberEntryListener? = null
 
     @Inject
@@ -46,8 +46,7 @@ class NumberEntryFragment: BaseFragment(), Validator.ValidationListener {
          */
 
         fun newInstance(): NumberEntryFragment {
-            val fragment = NumberEntryFragment()
-            return fragment
+            return NumberEntryFragment()
         }
     }
 

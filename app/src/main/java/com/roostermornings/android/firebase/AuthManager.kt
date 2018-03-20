@@ -1,6 +1,5 @@
 package com.roostermornings.android.firebase
 
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
@@ -17,11 +16,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.firebase.FirebaseNetwork.createOrUpdateRoosterUser
 import com.roostermornings.android.keys.PrefsKey
-import com.roostermornings.android.onboarding.OnboardingActivity
-import com.roostermornings.android.onboarding.ProfileCreationFragment
 import com.roostermornings.android.util.ConnectivityUtils
-import com.roostermornings.android.util.Constants
-import java.net.URL
 import javax.inject.Inject
 
 /**
@@ -84,7 +79,7 @@ class AuthManager(val context: Context) {
         }
     }
 
-    fun getPersistedAnonymousUID(): String? {
+    private fun getPersistedAnonymousUID(): String? {
         return sharedPrefs.getString(PrefsKey.ANONYMOUS_USER_UID.name, null)
     }
 

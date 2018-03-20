@@ -4,23 +4,22 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.support.design.widget.Snackbar
 import com.crashlytics.android.Crashlytics
-import com.roostermornings.android.BaseApplication
-import com.roostermornings.android.sqlutil.DeviceAlarmTableManager
-import io.realm.Realm
-import java.util.*
-import javax.inject.Inject
-import com.google.gson.FieldAttributes
 import com.google.gson.ExclusionStrategy
+import com.google.gson.FieldAttributes
 import com.google.gson.GsonBuilder
+import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.activity.MyAlarmsFragmentActivity
 import com.roostermornings.android.domain.local.MetricsErrorEvent
 import com.roostermornings.android.firebase.FA
 import com.roostermornings.android.firebase.UserMetrics
 import com.roostermornings.android.keys.PrefsKey
-import com.roostermornings.android.util.Constants
 import com.roostermornings.android.snackbar.SnackbarManager
+import com.roostermornings.android.util.Constants
+import io.realm.Realm
 import io.realm.RealmObject
 import java.lang.reflect.Modifier
+import java.util.*
+import javax.inject.Inject
 
 
 /**
@@ -31,7 +30,6 @@ class RealmAlarmFailureLog(val context: Context) {
 
     @Inject lateinit var realm: Realm
     @Inject lateinit var realmScheduledSnackbar: RealmScheduledSnackbar
-    @Inject lateinit var alarmTableManager: DeviceAlarmTableManager
     @Inject lateinit var sharedPreferences: SharedPreferences
 
     init {
@@ -282,7 +280,7 @@ class RealmAlarmFailureLog(val context: Context) {
                 .findAll().toList()
     }
 
-    fun getAlarmFailureLogByUIDAndPIID(alarmUid: String, pendingIntentID: Int): AlarmFailureLog? {
+    private fun getAlarmFailureLogByUIDAndPIID(alarmUid: String, pendingIntentID: Int): AlarmFailureLog? {
         return realm.where(AlarmFailureLog::class.java)
                 .equalTo("pendingIntentID", pendingIntentID)
                 .equalTo("alarmUid", alarmUid)

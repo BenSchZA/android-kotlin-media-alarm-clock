@@ -173,7 +173,7 @@ class SnackbarManager(val activity: Activity, val activityContentView: Coordinat
 
     /** For snackbar with high priority, lock queue. No more elements can be added.*/
     private var locked: Boolean = false
-    fun setLocked(lock: Boolean = false) {
+    private fun setLocked(lock: Boolean = false) {
         locked = lock
         if(locked) clearTimerTask()
     }

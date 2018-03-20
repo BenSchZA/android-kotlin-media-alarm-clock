@@ -14,7 +14,6 @@ import butterknife.OnClick
 import com.roostermornings.android.R
 import com.roostermornings.android.dagger.RoosterApplicationComponent
 import com.roostermornings.android.fragment.base.BaseFragment
-import com.roostermornings.android.util.RoosterUtils
 import kotlinx.android.synthetic.main.fragment_onboarding_channel_demo.view.*
 import android.support.v7.widget.GridLayoutManager
 import com.roostermornings.android.domain.local.OnboardingJourneyEvent
@@ -88,11 +87,7 @@ class ChannelDemoFragment : BaseFragment(), ChannelDemoInterface, FragmentInterf
          */
 
         fun newInstance(): ChannelDemoFragment {
-            val fragment = ChannelDemoFragment()
-//            val args = Bundle()
-//            args.putParcelable(ARG_WINDOW_SIZE, windowSize)
-//            fragment.arguments = args
-            return fragment
+            return ChannelDemoFragment()
         }
     }
 

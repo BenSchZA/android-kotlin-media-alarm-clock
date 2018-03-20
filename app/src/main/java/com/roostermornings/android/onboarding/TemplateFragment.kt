@@ -20,11 +20,7 @@ class TemplateFragment : BaseFragment() {
          */
 
         fun newInstance(): TemplateFragment {
-            val fragment = TemplateFragment()
-//            val args = Bundle()
-//            args.putParcelable(ARG_WINDOW_SIZE, windowSize)
-//            fragment.arguments = args
-            return fragment
+            return TemplateFragment()
         }
     }
 

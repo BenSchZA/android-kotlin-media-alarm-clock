@@ -19,10 +19,10 @@ import com.roostermornings.android.R
  */
 class AlarmToggleWidgetConfigureActivity : Activity() {
 
-    internal var mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
-    val mAppWidgetText: EditText by lazy { findViewById<View>(R.id.appwidget_text) as EditText }
+    private var mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
+    private val mAppWidgetText: EditText by lazy { findViewById<View>(R.id.appwidget_text) as EditText }
 
-    internal var mOnClickListener: View.OnClickListener = View.OnClickListener {
+    private var mOnClickListener: View.OnClickListener = View.OnClickListener {
         val context = this@AlarmToggleWidgetConfigureActivity
 
         // When the button is clicked, store the string locally

@@ -20,7 +20,7 @@ import java.util.*
 
 class IntroFragment : BaseFragment() {
 
-    var logoAnimated: Boolean = false
+    private var logoAnimated: Boolean = false
 
     companion object {
         private val CLOUD_MAX_WIDTH = 300

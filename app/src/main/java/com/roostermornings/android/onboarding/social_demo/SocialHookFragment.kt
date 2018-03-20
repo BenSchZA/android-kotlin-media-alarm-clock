@@ -32,11 +32,7 @@ class SocialHookFragment: BaseFragment() {
          */
 
         fun newInstance(): SocialHookFragment {
-            val fragment = SocialHookFragment()
-//            val args = Bundle()
-//            args.putParcelable(ARG_WINDOW_SIZE, windowSize)
-//            fragment.arguments = args
-            return fragment
+            return SocialHookFragment()
         }
     }
 

@@ -16,7 +16,6 @@ import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
 import android.view.View
 import android.widget.Toast
-
 import com.roostermornings.android.BaseApplication
 import com.roostermornings.android.R
 import com.roostermornings.android.activity.FAQActivity
@@ -28,10 +27,7 @@ import com.roostermornings.android.snackbar.SnackbarManager
 import com.roostermornings.android.sqlutil.AudioTableManager
 import com.roostermornings.android.sync.DownloadSyncAdapter
 import java.util.*
-
 import javax.inject.Inject
-import android.support.v4.content.ContextCompat.startActivity
-
 
 
 /**

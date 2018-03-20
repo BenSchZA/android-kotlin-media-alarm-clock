@@ -284,7 +284,7 @@ class NewAudioFriendsActivity : BaseActivity() {
     }
 
     companion object {
-        protected val TAG: String = NewAudioFriendsActivity::class.java.simpleName
+        private val TAG: String = NewAudioFriendsActivity::class.java.simpleName
         private var statusCode = 0
     }
 }
