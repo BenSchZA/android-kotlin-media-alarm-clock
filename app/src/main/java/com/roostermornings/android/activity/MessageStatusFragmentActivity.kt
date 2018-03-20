@@ -122,7 +122,7 @@ class MessageStatusFragmentActivity : BaseActivity(), MessageStatusReceivedFragm
         updateRequestNotification()
     }
 
-    public override fun onPause() {
+    override fun onPause() {
         super.onPause()
 
         messageStatusFragment1?.mAdapterClass?.resetMediaPlayer()

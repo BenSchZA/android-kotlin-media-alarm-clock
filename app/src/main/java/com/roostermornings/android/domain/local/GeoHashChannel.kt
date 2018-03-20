@@ -23,7 +23,7 @@ class GeoHashChannel : Serializable {
     var uid: String = ""
 
     // Required default constructor for Firebase object mapping
-    constructor() {}
+    constructor()
 
     constructor(g: ArrayList<String>, l: ArrayList<Double>, rad: Int, uid: String) {
         this.g = g

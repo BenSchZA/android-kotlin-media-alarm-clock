@@ -189,10 +189,6 @@ class FriendsInviteFragment3 : BaseFragment() {
         fun onFragmentInteraction(uri: Uri)
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     fun requestPermissionReadContacts() {
         //Clear explainer on entry, show if necessary i.e. permission previously denied
         displayRequestPermissionExplainer(false)

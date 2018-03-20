@@ -25,10 +25,6 @@ class LockableViewPager : ViewPager {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    override fun performClick(): Boolean {
-        return super.performClick()
-    }
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
         return if(isSwipeAllowed(event)) {
             performClick()

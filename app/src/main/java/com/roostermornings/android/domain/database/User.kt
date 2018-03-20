@@ -30,7 +30,7 @@ class User : Serializable {
     var selected = false //this is important for list of friends that need to be selected eg for creating a new alarm
 
     // Required default constructor for Firebase object mapping
-    constructor() {}
+    constructor()
 
     constructor(channels: HashMap<String, Boolean>?,
                 device_type: String?,

@@ -1,21 +1,11 @@
 package com.roostermornings.android
 
 import android.content.Context
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
 import com.roostermornings.android.realm.AlarmFailureLog
 import com.roostermornings.android.realm.RealmAlarmFailureLog
 import com.roostermornings.android.util.Constants
 import io.realm.Realm
-import org.junit.runner.RunWith
-import org.hamcrest.core.Is.`is`
-import org.junit.Assert.assertThat
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
-import org.junit.rules.TemporaryFolder
 import io.realm.RealmConfiguration
-import org.junit.After
 
 
 /**

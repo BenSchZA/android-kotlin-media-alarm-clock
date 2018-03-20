@@ -181,10 +181,6 @@ class FriendsRequestFragment2 : BaseFragment() {
         fun onFragmentInteraction(uri: Uri)
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     companion object {
 
         private val TAG = FriendsFragmentActivity::class.java.simpleName
