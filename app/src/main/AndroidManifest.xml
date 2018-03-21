@@ -249,6 +249,7 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
         </service>
+
         <service android:name=".sync.AuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
@@ -274,7 +275,7 @@
         <service
             android:name=".service.MediaService"
             android:enabled="true"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
                 <action android:name="android.media.AUDIO_BECOMING_NOISY" />
@@ -305,10 +306,11 @@
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
         <service
             android:name=".widgets.WidgetService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
 
         <receiver
             android:name=".receiver.WidgetBroadcastReceiver"
@@ -336,7 +338,7 @@
         <service
             android:name=".service.ForegroundService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
 
         <receiver android:name=".receiver.UpgradeReceiver">
             <intent-filter>
