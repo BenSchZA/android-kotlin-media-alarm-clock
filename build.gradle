@@ -12,7 +12,7 @@ buildscript {
         maven { url "https://maven.google.com" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-alpha06'
+        classpath 'com.android.tools.build:gradle:3.2.0-alpha08'
         //classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         //Keep the following dep for now, due to https://issuetracker.google.com/issues/38419426#comment8 issue with AS 3.0
         classpath 'com.google.firebase:firebase-plugins:1.1.0-alpha1'
