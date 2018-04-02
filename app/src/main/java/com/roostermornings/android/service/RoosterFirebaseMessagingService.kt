@@ -104,7 +104,7 @@ class RoosterFirebaseMessagingService : FirebaseMessagingService() {
         @TargetApi(26)
         if(RoosterUtils.hasO()) {
             val channelA = notificationManager.getNotificationChannel(NotificationChannelID.FIREBASE_MESSAGING.name)
-            channelA.setShowBadge(true)
+            channelA?.setShowBadge(true)
 
             if(channelA == null) {
 
