@@ -6,13 +6,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.10'
+    ext.kotlin_version = '1.2.30'
     repositories {
         jcenter()
         maven { url "https://maven.google.com" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-alpha08'
+        classpath 'com.android.tools.build:gradle:3.2.0-alpha11'
         //classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         //Keep the following dep for now, due to https://issuetracker.google.com/issues/38419426#comment8 issue with AS 3.0
         classpath 'com.google.firebase:firebase-plugins:1.1.0-alpha1'
